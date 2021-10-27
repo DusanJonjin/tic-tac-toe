@@ -1,10 +1,13 @@
-import React from 'react'
+import React from 'react';
 
-export function Square() {
+export function Square({ squareValue, handleSquareClick }) {
 
     return (
-        <div className='square'>
-            Square
-        </div>
-    )
+        <button 
+            className='square'
+            onClick={handleSquareClick}
+        >
+            {squareValue}
+        </button>
+    );
 }

@@ -1,0 +1,28 @@
+.board-with-status {
+    width: 33.3%;
+    margin: 100px auto 15px auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    /*border: 2px solid grey;*/
+}
+
+.board {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+    
+}
+
+.board > button {
+    width: 70px;
+    height: 70px;
+    border-radius: 0;
+    background-color: rgb(40, 43, 44);
+    color: blanchedalmond;
+}
+
+.status {
+    color: white;
+}
