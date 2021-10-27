@@ -1,10 +1,17 @@
-import React from 'react'
+import React from 'react';
+import '../Styles/GameFlow.css'
 
-export function GameFlow() {
+export function GameFlow({ boardHistory, jumpToMove }) {
+
+    const movesHistory = boardHistory.map((board, i) => 
+        <button key={i} onClick={() => jumpToMove(i)}>
+            {i ? `Go to move ${i}` : 'Go to game start'}
+        </button>
+    );
 
     return (
-        <div className='game-flow'>
-            
-        </div>
+        <section className='game-flow'>
+            {movesHistory}
+        </section>
     )
 }

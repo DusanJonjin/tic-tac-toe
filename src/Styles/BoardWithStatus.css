@@ -15,12 +15,16 @@
     
 }
 
-.board > button {
+.square {
     width: 70px;
     height: 70px;
     border-radius: 0;
     background-color: rgb(40, 43, 44);
     color: blanchedalmond;
+}
+
+.winner-square {
+    color: rgb(86, 86, 226)
 }
 
 .status {

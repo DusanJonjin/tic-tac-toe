@@ -1,0 +1,4 @@
+.game-flow {
+    display: flex;
+    flex-direction: column;
+}

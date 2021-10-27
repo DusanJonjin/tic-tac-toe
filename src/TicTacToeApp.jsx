@@ -1,6 +1,8 @@
 import React, {useState, useEffect} from 'react';
 import { BoardWithStatus } from './Components/BoardWithStatus';
 import { GameFlow } from './Components/GameFlow';
+import { gameWinner } from './gameFunctions';
+import './Styles/TicTacToeApp.css'
  
 export function TicTacToeApp() {
 
@@ -14,10 +16,12 @@ export function TicTacToeApp() {
 
     const currentBoard = boardHistory[moveNumber];
 
-    const playerSymbol = moveNumber % 2 === 0 ? symbol.x : symbol.o
+    const { winner, winnerLine } = gameWinner(currentBoard);
+
+    const playerSymbol = moveNumber % 2 === 0 ? symbol.x : symbol.o;
 
     const handleSquareClick = (squareValue, squareIndex) => {
-        if (squareValue) return;
+        if (squareValue || winner) return;
         setBoardHistory(prevBoardHistory => {
             const currBoardHistory = prevBoardHistory.slice(0, moveNumber + 1);
             const currBoard = currBoardHistory[moveNumber];
@@ -27,15 +31,23 @@ export function TicTacToeApp() {
         setMoveNumber(prevMoveNumber => prevMoveNumber + 1);
     }
 
+    const jumpToMove = selectedMove => {
+        setMoveNumber(selectedMove);
+    }
 
     return (
         <main className="app">
             <BoardWithStatus 
                 currboard={currentBoard}
                 handleSquareClick={handleSquareClick}  
-                playerSymbol={playerSymbol}            
+                playerSymbol={playerSymbol}
+                winner={winner}
+                winnerLine={winnerLine}           
             />
-            <GameFlow />
+            <GameFlow 
+                boardHistory={boardHistory}
+                jumpToMove={jumpToMove}
+            />
         </main>
     );
 }
