@@ -13,5 +13,5 @@ export function GameFlow({ boardHistory, jumpToMove }) {
         <section className='game-flow'>
             {movesHistory}
         </section>
-    )
+    );
 }
