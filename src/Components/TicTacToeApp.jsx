@@ -1,9 +1,13 @@
 import React, {useState, useEffect} from 'react';
-import { Menu } from './Components/Menu';
-import { BoardWithStatus } from './Components/BoardWithStatus';
-import { GameFlow } from './Components/GameFlow';
-import { gameWinner } from './gameFunctions';
-import './Styles/TicTacToeApp.css'
+import { Menu } from './Menu/Menu';
+import { ChooseSymbol } from './Menu/ChooseSymbol';
+import { ChooseDifficulty } from './Menu/ChooseDifficulty';
+import { BoardWithStatus } from './BoardWithStatus/BoardWithStatus';
+import { Board } from './BoardWithStatus/Board';
+import { GameStatus } from './BoardWithStatus/GameStatus';
+import { GameFlow } from './GameFlow/GameFlow';
+import { gameWinner } from '../Utilities/gameFunctions';
+import '../Styles/TicTacToeApp.css'
  
 export function TicTacToeApp() {
 
@@ -107,18 +111,23 @@ export function TicTacToeApp() {
         <main className="app">
             <Menu 
                 handleGameType={handleGameType}
-                handleChooseSymbol={handleChooseSymbol}
-                handleChooseDifficulty={handleChooseDifficulty}
                 handleGameStart={handleGameStart}
                 computerIsPlaying={computer.isPlaying}         
-            />
-            <BoardWithStatus 
-                currboard={currentBoard}
-                handleSquareClick={handleSquareClick}  
-                playerSymbol={playerSymbol}
-                winner={winner}
-                winnerLine={winnerLine}           
-            />
+            >
+                <ChooseSymbol handleChooseSymbol={handleChooseSymbol} />
+                <ChooseDifficulty handleChooseDifficulty={handleChooseDifficulty} />
+            </Menu>
+            <BoardWithStatus gameIsActive={gameIsActive} >
+                <Board 
+                    currBoard={currentBoard}
+                    winnerLine={winnerLine}
+                    handleSquareClick={handleSquareClick}
+                />
+                <GameStatus 
+                    winner={winner}
+                    playerSymbol={playerSymbol}
+                />
+            </BoardWithStatus>
             <GameFlow 
                 boardHistory={boardHistory}
                 jumpToMove={jumpToMove}

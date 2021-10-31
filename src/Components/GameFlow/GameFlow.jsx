@@ -1,5 +1,5 @@
 import React from 'react';
-import '../Styles/GameFlow.css'
+import '../../Styles/GameFlow.css'
 
 export function GameFlow({ boardHistory, jumpToMove }) {
 
