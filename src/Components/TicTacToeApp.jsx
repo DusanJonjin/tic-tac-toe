@@ -6,8 +6,8 @@ import { BoardWithStatus } from './BoardWithStatus/BoardWithStatus';
 import { Board } from './BoardWithStatus/Board';
 import { GameStatus } from './BoardWithStatus/GameStatus';
 import { GameFlow } from './GameFlow/GameFlow';
-import { gameWinner } from '../Utilities/gameFunctions';
-import '../Styles/TicTacToeApp.css'
+import { gameWinner, bestMove } from '../Utilities/gameFunctions';
+import '../Styles/TicTacToeApp.css';
  
 export function TicTacToeApp() {
 
@@ -21,7 +21,7 @@ export function TicTacToeApp() {
 
     const [moveNumber, setMoveNumber] = useState(0);
 
-    const player = {x: 'X', o: 'O'}
+    const player = {x: 'X', o: 'O'};
 
     const [computer, setComputer] = useState({isPlaying: true, symbol: player.o});
 
@@ -34,9 +34,11 @@ export function TicTacToeApp() {
 
     const playerSymbol = moveNumber % 2 === 0 ? player.x : player.o;
 
-    const humanSymbol = computer.symbol === player.o ? player.x : player.o;
+    const comp = computer.symbol;
 
-    const computerIsNext =  computer.isPlaying && (computer.symbol === playerSymbol);
+    const human = comp === player.o ? player.x : player.o;
+
+    const computerIsNext = computer.isPlaying && (comp === playerSymbol);
     
 
     const handleGameType = i => {
@@ -90,20 +92,36 @@ export function TicTacToeApp() {
             const currBoard = currBoardHistory[moveNumber];
             const cBoardNullIndexes = currBoard.reduce((acc, v, i) => !v ? [...acc, i] : acc, []);
             const randomNullIndex = cBoardNullIndexes[Math.floor(Math.random() * cBoardNullIndexes.length)];
-            const newBoard = currBoard.map((v, i) => i === randomNullIndex ? computer.symbol : v);
+            const newBoard = currBoard.map((v, i) => i === randomNullIndex ? comp : v);
             return [...currBoardHistory, newBoard];
         })
     }
+
+    const impossibleGame = () => {
+        setBoardHistory(prevBoardHistory => {
+            const currBoardHistory = prevBoardHistory.slice(0, moveNumber + 1);
+            const currBoard = [...currBoardHistory[moveNumber]];
+            bestMove(moveNumber, currBoard, comp, human);
+            return [...currBoardHistory, currBoard];
+        });
+    };
 
     useEffect(() => {
         if (winner) setGameStarted(false);
         if (gameStarted) {
             if (winner || moveNumber > 8) return;
             if (computerIsNext) setTimeout(() => {
-                easyGame();
+                switch(difficulty) {
+                    case 'easy': easyGame();
+                    break;
+                    case 'medium': return;
+                    break;
+                    case 'impossible': impossibleGame();
+                    break;
+                    default: return
+                }
                 setMoveNumber(prevMoveNumber => prevMoveNumber + 1)
-            }, 500)
-
+            }, 600);
         }
     }, [winner, gameIsActive, computerIsNext])
 
