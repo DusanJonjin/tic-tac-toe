@@ -86,14 +86,31 @@ export function TicTacToeApp() {
         setGameStarted(true);
     }
 
+    const getRandomNullIndex = board => {
+        const boardNullIndexes = board.reduce((acc, v, i) => !v ? [...acc, i] : acc, []);
+        return boardNullIndexes[Math.floor(Math.random() * boardNullIndexes.length)];
+    };
+
     const easyGame = () => {
         setBoardHistory(prevBoardHistory => {
             const currBoardHistory = prevBoardHistory.slice(0, moveNumber + 1);
             const currBoard = currBoardHistory[moveNumber];
-            const cBoardNullIndexes = currBoard.reduce((acc, v, i) => !v ? [...acc, i] : acc, []);
-            const randomNullIndex = cBoardNullIndexes[Math.floor(Math.random() * cBoardNullIndexes.length)];
+            const randomNullIndex = getRandomNullIndex(currBoard);
             const newBoard = currBoard.map((v, i) => i === randomNullIndex ? comp : v);
             return [...currBoardHistory, newBoard];
+        })
+    }
+
+    const mediumGame = () => {
+        setBoardHistory(prevBoardHistory => {
+            const currBoardHistory = prevBoardHistory.slice(0, moveNumber + 1);
+            const currBoard = [...currBoardHistory[moveNumber]];
+            if (moveNumber > 5) {
+                const randomNullIndex = getRandomNullIndex(currBoard);
+                currBoard[randomNullIndex] = comp;
+            }
+            else bestMove(moveNumber, currBoard, comp, human);
+            return [...currBoardHistory, currBoard];
         })
     }
 
@@ -114,7 +131,7 @@ export function TicTacToeApp() {
                 switch(difficulty) {
                     case 'easy': easyGame();
                     break;
-                    case 'medium': return;
+                    case 'medium': mediumGame();
                     break;
                     case 'impossible': impossibleGame();
                     break;
