@@ -1,4 +1,5 @@
 import React from 'react';
+import '../../Styles/Menu.css';
 
 export function Menu(props) {
 
@@ -25,17 +26,17 @@ export function Menu(props) {
     );
 
     return (
-        <section>
-        <form>
-            <div>
-                <label>Choose a game:</label>           
-                {chooseGame}
-            </div>
-            <div className={`select-options ${!computerIsPlaying && 'no-select'}`}>
-                {children}
-            </div>
-            <button type='submit' onClick={e => handleGameStart(e)}>Start a new game</button>
-        </form>
-    </section>
+        <section className='menu'>
+            <form>
+                <div className='game'>
+                    <label>Choose a game:</label>           
+                    {chooseGame}
+                </div>
+                <div className={`select-options ${!computerIsPlaying && 'no-select'}`}>
+                    {children}
+                </div>
+                <button type='submit' onClick={e => handleGameStart(e)}>Start a new game</button>
+            </form>
+        </section>
     );
 }

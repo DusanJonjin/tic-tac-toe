@@ -3,8 +3,6 @@ import { Menu } from './Menu/Menu';
 import { ChooseSymbol } from './Menu/ChooseSymbol';
 import { ChooseDifficulty } from './Menu/ChooseDifficulty';
 import { BoardWithStatus } from './BoardWithStatus/BoardWithStatus';
-import { Board } from './BoardWithStatus/Board';
-import { GameStatus } from './BoardWithStatus/GameStatus';
 import { GameFlow } from './GameFlow/GameFlow';
 import { gameWinner, bestMove } from '../Utilities/gameFunctions';
 import '../Styles/TicTacToeApp.css';
@@ -30,7 +28,7 @@ export function TicTacToeApp() {
 
     const { winner, winnerLine } = gameWinner(currentBoard);
 
-    const gameIsActive = gameStarted ? !winner : winner;
+    const gameIsActive = gameStarted && !winner;
 
     const playerSymbol = moveNumber % 2 === 0 ? player.x : player.o;
 
@@ -71,7 +69,7 @@ export function TicTacToeApp() {
     };
 
     const handleSquareClick = (squareValue, squareIndex) => {
-        if (squareValue || computerIsNext || winner) return;
+        if (!gameStarted || squareValue || computerIsNext || winner) return;
         setBoardHistory(prevBoardHistory => {
             const currBoardHistory = prevBoardHistory.slice(0, moveNumber + 1);
             const currBoard = currBoardHistory[moveNumber];
@@ -140,7 +138,8 @@ export function TicTacToeApp() {
                 setMoveNumber(prevMoveNumber => prevMoveNumber + 1)
             }, 600);
         }
-    }, [winner, gameIsActive, computerIsNext])
+    }, [winner, gameIsActive, computerIsNext]);
+
 
     return (
         <main className="app">
@@ -152,17 +151,14 @@ export function TicTacToeApp() {
                 <ChooseSymbol handleChooseSymbol={handleChooseSymbol} />
                 <ChooseDifficulty handleChooseDifficulty={handleChooseDifficulty} />
             </Menu>
-            <BoardWithStatus gameIsActive={gameIsActive} >
-                <Board 
-                    currBoard={currentBoard}
-                    winnerLine={winnerLine}
-                    handleSquareClick={handleSquareClick}
-                />
-                <GameStatus 
-                    winner={winner}
-                    playerSymbol={playerSymbol}
-                />
-            </BoardWithStatus>
+            <BoardWithStatus 
+                currBoard={currentBoard}
+                winnerLine={winnerLine}
+                handleSquareClick={handleSquareClick}
+                winner={winner}
+                playerSymbol={playerSymbol}
+            
+            />
             <GameFlow 
                 boardHistory={boardHistory}
                 jumpToMove={jumpToMove}

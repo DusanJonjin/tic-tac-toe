@@ -1,0 +1,23 @@
+.menu {
+    color: hsl(206, 11%, 87%);
+}
+
+.game-btn {
+    background-color: hsl(225, 44%, 39%);
+    width: 65px;
+    margin-left: 20px;
+    border: none;
+}
+
+.btn-active {
+    background-color: hsl(225, 65%, 72%);
+
+}
+
+.game {
+    display: block
+}
+
+.game > label {
+    margin-right: 15px;
+}

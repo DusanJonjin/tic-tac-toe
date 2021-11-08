@@ -1,7 +1,7 @@
 import React from 'react';
 import { Square } from './Square';
 
-export function Board({ currBoard, winnerLine, handleSquareClick}) {
+export function Board({ currBoard, winner, winnerLine, handleSquareClick}) {
 
     const board = currBoard.map((v, i) => {
         const isWinnerSquare = winnerLine.includes(i);
