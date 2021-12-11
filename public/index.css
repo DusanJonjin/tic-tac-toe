@@ -1,5 +1,10 @@
 /* Add CSS styles here! */
+:root {
+    --main-background: hsl(224, 31%, 15%);
+}
+
 body {
   font-family: sans-serif;
-  background-color: hsl(224, 31%, 15%);
+  margin: 0;
+  background-color: var(--main-background)
 }

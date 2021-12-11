@@ -30,6 +30,8 @@ export function TicTacToeApp() {
 
     const gameIsActive = gameStarted && !winner;
 
+    const gameNotActive = !gameStarted && !winner;
+
     const playerSymbol = moveNumber % 2 === 0 ? player.x : player.o;
 
     const comp = computer.symbol;
@@ -40,13 +42,16 @@ export function TicTacToeApp() {
     
 
     const handleGameType = i => {
-        setComputer(prevComputer => ({...prevComputer, isPlaying: !i})); // i can be 0 (1 player), or 1 (2 players)
+        // i can be 0 (1 player), or 1 (2 players)
+        if (i && !computer.isPlaying || !i && computer.isPlaying) return;
+        setComputer(prevComputer => ({...prevComputer, isPlaying: !i})); 
         setGameStarted(false);
         setBoardHistory(initialBoardHistory);
         setMoveNumber(0);
     };
 
     const handleChooseSymbol = chosenSymbol => {
+        if (chosenSymbol !== computer.symbol) return;
         const compSymbol = chosenSymbol === player.x ? player.o : player.x;
         setComputer(prevComputer => ({...prevComputer, symbol: compSymbol}));
         setGameStarted(false);
@@ -82,6 +87,7 @@ export function TicTacToeApp() {
     const jumpToMove = selectedMove => {
         setMoveNumber(selectedMove);
         setGameStarted(true);
+        window.scrollTo(0, 0)
     }
 
     const getRandomNullIndex = board => {
@@ -148,7 +154,10 @@ export function TicTacToeApp() {
                 handleGameStart={handleGameStart}
                 computerIsPlaying={computer.isPlaying}         
             >
-                <ChooseSymbol handleChooseSymbol={handleChooseSymbol} />
+                <ChooseSymbol 
+                    handleChooseSymbol={handleChooseSymbol} 
+                    humanSymbol={human}                   
+                />
                 <ChooseDifficulty handleChooseDifficulty={handleChooseDifficulty} />
             </Menu>
             <BoardWithStatus 
@@ -157,11 +166,12 @@ export function TicTacToeApp() {
                 handleSquareClick={handleSquareClick}
                 winner={winner}
                 playerSymbol={playerSymbol}
-            
+                gameNotActive={gameNotActive}         
             />
             <GameFlow 
                 boardHistory={boardHistory}
                 jumpToMove={jumpToMove}
+                gameNotActive={gameNotActive}
             />
         </main>
     );

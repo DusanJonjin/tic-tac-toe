@@ -1,17 +1,57 @@
 .menu {
     color: hsl(206, 11%, 87%);
+    width: 500px;
+    max-width: 100%;
+    padding: 5px 0 20px 0;
+    /*border: 1px solid firebrick*/
+}
+
+.menu-form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 350px;
+    max-width: 100%;
+    margin: 0 auto
+}
+
+.choose-options-wrap {
+    margin: 0 auto;
+}
+
+.choose-option {
+    display: flex;
+    max-width: 100%;
+    padding: 7px 0;
+    justify-content: space-around;
+}
+
+.choose-option > label {
+    font-size: 15px;
+    align-self: center;
+    width: 75px;
+}
+
+.choose-option > *:nth-child(2) {
+    width: 174px;
 }
 
 .game-btn {
-    background-color: hsl(225, 44%, 39%);
-    width: 65px;
-    margin-left: 20px;
+    font-size: 14px;
+    color: hsl(224, 100%, 85%);
+    background-color: hsl(220, 33%, 30%);
+    width: 80px;
+    padding: 3px 0;
+    border: 2px solid hsl(0, 0%, 90%);
     border: none;
+    border-radius: 5px;
+    margin-right: 7px;
 }
 
 .btn-active {
-    background-color: hsl(225, 65%, 72%);
-
+    color: white;
+    background-color: hsl(225, 56%, 56%);
+    border: none
 }
 
 .game {
@@ -19,5 +59,16 @@
 }
 
 .game > label {
-    margin-right: 15px;
+    margin-right: 5px;
+}
+
+button[type=submit] {
+    font-size: 15px;
+    font-weight: bold;
+    margin: 15px auto 10px auto;
+    border: none;
+    background-color: hsl(220, 33%, 29%);
+    color: hsl(224, 75%, 83%);
+    border-radius: 5px;
+    padding: 5px 15px;
 }

@@ -1,4 +1,64 @@
 .game-flow {
+    width: 500px;
+    max-width: 100%;
+    /*border: 1px solid honeydew*/
+}
+
+#moves-list {  
+    width: calc(250px + 15vw); 
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 20px 20px;
+    list-style: none;
+    margin: 15px auto 20px auto;
+    padding: 0;
+    /*border: 1px solid fuchsia*/
+}
+
+.move {
     display: flex;
     flex-direction: column;
+    align-items: center;
+    margin: 0;
+    padding: 0;
+    gap: 10px 0;
+}
+
+.move > button {
+    font-size: 14px;
+    width: 90%;
+    padding: .3em 0;
+    background-color: hsl(220, 33%, 28%);
+    color: hsl(224, 100%, 88%);
+    border: none;
+    border-radius: 4px;
+}
+
+.move > .board {
+    grid-template-columns: repeat(3, calc(36px + 2.5vw));
+    grid-template-rows: repeat(3, calc(36px + 2.5vw));
+    row-gap: 3px;
+    column-gap: 3px;
+}
+
+.move .square {
+    font-size: calc(15px + 1.5vw);
+    background-color: hsl(221, 35%, 11%);
+    border-radius: 2px;
+}
+
+@media only screen and (min-width: 1001px) {
+
+    .move .square {
+        font-size: 1.2em;
+        width: 2vw;
+        height: 2vw;
+        border-radius: 2px;
+    }
+
+    #moves-list {   
+        gap:20px;
+    }
+
 }

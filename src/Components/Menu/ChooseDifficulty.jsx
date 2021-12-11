@@ -1,21 +1,25 @@
-import React from 'react'
+import React from 'react';
+import '../../Styles/ChooseDifficulty.css'
 
 export function ChooseDifficulty({ handleChooseDifficulty }) {
 
     const difficulties = ['easy', 'medium', 'impossible'];
 
-    const chooseDifficulty = difficulties.map(difficulty =>
-        <option key={difficulty} value={difficulty}>
-            {difficulty}
-        </option>                
-    );
-
     return (
-        <div className='select-difficulty'>
-            <label>Choose a difficulty:</label>
-            <select onChange={e => handleChooseDifficulty(e.target.value)}>
-                {chooseDifficulty}
-            </select>
+        <div className='choose-option'>
+            <label>Difficulty:</label>
+            <div>
+                <select 
+                    className='select-difficulty'
+                    onChange={e => handleChooseDifficulty(e.target.value)}
+                >
+                    {difficulties.map(difficulty =>
+                        <option key={difficulty} value={difficulty}>
+                            {difficulty}
+                        </option>
+                    )}   
+                </select>
+            </div>
         </div>
     );
 }

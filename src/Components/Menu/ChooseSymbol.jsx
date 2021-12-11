@@ -1,21 +1,25 @@
 import React from 'react';
+import '../../Styles/ChooseSymbol.css'
 
-export function ChooseSymbol({ handleChooseSymbol }) {
+export function ChooseSymbol({ handleChooseSymbol, humanSymbol }) {
 
     const symbols = ['X', 'O'];
 
-    const chooseSymbol= symbols.map(symbol =>
-        <option key={symbol} value={symbol}>
-            {symbol}
-        </option>      
-    );
-
     return (
-        <div className='select-symbol'>
-            <label>Choose your symbol:</label>
-            <select onChange={e => handleChooseSymbol(e.target.value)}>
-                {chooseSymbol}
-            </select>
+        <div className='choose-option'>
+            <label>Symbol:</label>
+            <div>
+                {symbols.map(symbol =>
+                    <button 
+                        type='button'
+                        key={symbol} 
+                        className={`symbol-btn ${symbol === humanSymbol ? 'symbol-active' : ''}`}
+                        onClick={() => handleChooseSymbol(symbol)}
+                    >
+                        {symbol}
+                    </button>
+                )}
+            </div>
         </div>
     );
 }

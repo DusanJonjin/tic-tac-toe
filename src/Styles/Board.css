@@ -1,0 +1,14 @@
+.board {
+    display: grid;
+    border-radius: 7px;
+}
+
+.square {
+    background-color: hsl(220, 33%, 24%);
+    color: blanchedalmond;
+    border: none;
+}
+
+.winner-square {
+    color: hsl(214, 91%, 70%);
+}

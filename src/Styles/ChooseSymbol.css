@@ -1,0 +1,17 @@
+.symbol-btn {   
+    font-size: 14px;
+    color: hsl(224, 100%, 85%);
+    background-color: hsl(220, 33%, 30%);
+    width: 80px;
+    padding: 3px 0;
+    /*border: 2px solid hsl(0, 0%, 90%);*/
+    border: none;
+    border-radius: 5px;
+    margin-right: 7px;
+}
+
+.symbol-active {
+    color: white;
+    background-color: hsl(225, 56%, 56%);
+   /* border: 2px solid white;*/
+}

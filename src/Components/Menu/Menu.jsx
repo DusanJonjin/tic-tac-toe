@@ -1,4 +1,5 @@
 import React from 'react';
+import { ChooseGame } from './ChooseGame';
 import '../../Styles/Menu.css';
 
 export function Menu(props) {
@@ -10,30 +11,17 @@ export function Menu(props) {
         computerIsPlaying
     } = props;
 
-    const types = ['1 player', '2 players'];
-
-    const playersCount = computerIsPlaying ? '1' : '2';
-
-    const chooseGame = types.map((gameType, i) =>
-        <button
-            key={gameType}
-            type='button'
-            className={`game-btn ${gameType.includes(playersCount) ? 'btn-active' : ''}`}
-            onClick={() => handleGameType(i)}
-        >
-            {gameType}
-        </button>      
-    );
-
     return (
         <section className='menu'>
-            <form>
-                <div className='game'>
-                    <label>Choose a game:</label>           
-                    {chooseGame}
-                </div>
-                <div className={`select-options ${!computerIsPlaying && 'no-select'}`}>
-                    {children}
+            <form className={`menu-form`}>
+                <div className={`choose-options-wrap`}>
+                    <ChooseGame 
+                        handleGameType={handleGameType} 
+                        computerIsPlaying={computerIsPlaying}
+                    />
+                    <div className={`select-options ${!computerIsPlaying ? 'no-select' : ''}`}>
+                        {children}
+                    </div>
                 </div>
                 <button type='submit' onClick={e => handleGameStart(e)}>Start a new game</button>
             </form>

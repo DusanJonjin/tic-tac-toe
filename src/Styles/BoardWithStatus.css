@@ -1,12 +1,12 @@
 .board-with-status {
-    width: 33.3%;
-    margin: 100px auto 15px auto;
+    width: 400px;
+    max-width: 100%;
+    padding: 10px 0;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    /*border: 2px solid grey;*/
-    /*filter: opacity(.25);*/
+    /*border: 1px solid greenyellow*/
 }
 
 .bws-active {
@@ -14,25 +14,28 @@
     filter: opacity(1);
 }
 
-.board {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    grid-template-rows: repeat(3, 1fr);
-    
+.board-with-status > .board {
+    grid-template-columns: repeat(3, calc(70px + 8vw));
+    grid-template-rows: repeat(3, calc(70px + 8vw));
+    row-gap: 7px;
+    column-gap: 7px;
 }
 
-.square {
-    width: 70px;
-    height: 70px;
-    border-radius: 0;
-    background-color: rgb(40, 43, 44);
-    color: blanchedalmond;
+.board-with-status .square {
+    font-size: calc(28px + 1.5vw);;
+    border-radius: 5px;
 }
 
-.winner-square {
-    color: rgb(86, 86, 226)
-}
+@media only screen and (min-width: 1001px) {
 
-.status {
-    color: white;
+    .board-with-status > .board {
+        row-gap: 8px;
+        column-gap: 8px;
+    }
+
+    .square {
+        width: calc(60px + 5vw);
+        height: calc(60px + 5vw);
+    }
+
 }
