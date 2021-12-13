@@ -1,12 +1,11 @@
 .board-with-status {
-    width: 400px;
+    width: var(--small-screen-width);
     max-width: 100%;
     padding: 10px 0;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    /*border: 1px solid greenyellow*/
 }
 
 .bws-active {
@@ -24,18 +23,24 @@
 .board-with-status .square {
     font-size: calc(28px + 1.5vw);;
     border-radius: 5px;
+    cursor: pointer;
+    transition: var(--main-transition);
 }
 
 @media only screen and (min-width: 1001px) {
 
+    .board-with-status {
+        width: var(--large-screen-width);
+    }
+
     .board-with-status > .board {
-        row-gap: 8px;
-        column-gap: 8px;
+        grid-template-columns: repeat(3, calc(75px + 3.5vw));
+        grid-template-rows: repeat(3, calc(75px + 3.5vw));
+        row-gap: .5em;
+        column-gap: .5em;
     }
 
-    .square {
-        width: calc(60px + 5vw);
-        height: calc(60px + 5vw);
+    .board-with-status .square {
+        font-size: calc(25px + 1.5vw);;
     }
-
 }

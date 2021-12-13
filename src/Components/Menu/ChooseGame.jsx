@@ -1,4 +1,5 @@
 import React from 'react';
+import '../../Styles/ChooseGame.css'
 
 export function ChooseGame({ handleGameType, computerIsPlaying }) {
 
@@ -14,7 +15,7 @@ export function ChooseGame({ handleGameType, computerIsPlaying }) {
                     <button
                         key={gameType}
                         type='button'
-                        className={`game-btn ${gameType.includes(playersCount) ? 'btn-active' : ''}`}
+                        className={`game-btn ${gameType.includes(playersCount) ? 'game-btn-active' : ''}`}
                         onClick={() => handleGameType(i)}
                     >
                         {gameType}

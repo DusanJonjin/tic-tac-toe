@@ -1,14 +1,25 @@
 .select-difficulty {
-    font-size: 14px;
-    padding: 3px 0;
-    width: 167px;
+    font-family: 'Roboto', sans-serif;
+    font-size: var(--sm-menu-btn-font);
+    width: 11.8em;
+    padding: .35em 0 .35em 1em;
     color: white;
     background-color: hsl(225, 56%, 56%);
-    /*border: 2px solid white;*/
     border: none;
     border-radius: 5px;
 }
 
 .select-difficulty > option {
     font-size: 15px;
+    padding-left: .35em;
+}
+
+@media only screen and (min-width: 1001px) {
+    .select-difficulty {
+        font-size: calc(10px + .5vw);
+    }
+
+    .select-difficulty > option {
+        font-size: calc(9px + .5vw);
+    }
 }

@@ -1,13 +1,12 @@
 .game-status {
-    width: 320px;
-    max-width: 100%;
+    font-family: 'Roboto', sans-serif;
+    width: 90%;
     height: 55px;
     line-height: 50px;
-    font-size: 1.4rem;
-    color: hsl(36, 100%, 92%);
+    font-size: calc(20px + .5vw);
     text-align: center;
+    color: hsl(36, 100%, 92%);
     margin: 0;
-    /*border: 1px solid wheat*/
 }
 
 .game-status > span {
@@ -17,9 +16,9 @@
 
 
 @media only screen and (min-width: 1001px) {
-    .game-status {
-        font-size: 1.7rem;
-    
-    }
 
+    .game-status {
+        height: 80px;
+        line-height: 80px;
+    }
 }

@@ -1,14 +1,30 @@
 .board {
     display: grid;
     border-radius: 7px;
+    transition: var(--main-transition);
+}
+
+.board-inactive {
+    opacity: .45;
 }
 
 .square {
+    font-family: 'Open sans', sans-serif;
     background-color: hsl(220, 33%, 24%);
     color: blanchedalmond;
     border: none;
+    outline: none;
+}
+
+.filled {
+    pointer-events: none;
 }
 
 .winner-square {
     color: hsl(214, 91%, 70%);
+}
+
+.board-inactive .square {
+    cursor: initial;
+    pointer-events: none;
 }

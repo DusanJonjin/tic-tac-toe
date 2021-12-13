@@ -1,10 +1,7 @@
 /* Add CSS styles here! */
-:root {
-    --main-background: hsl(224, 31%, 15%);
-}
 
 body {
   font-family: sans-serif;
   margin: 0;
-  background-color: var(--main-background)
+  background-color: hsl(224, 31%, 15%);
 }

@@ -1,3 +1,15 @@
+:root {
+    --small-screen-width: 500px;
+    --large-screen-width: calc(200px + 20vw);
+    --sm-menu-btn-font: 14px;
+    --lg-menu-btn-font: calc(10px + .5vw);
+    --menu-btn-color: hsl(220, 33%, 30%); 
+    --menu-btn-active-color: hsl(225, 56%, 56%);
+    --hover-font-color: hsl(224, 75%, 95%);
+    --hover-background: hsl(220, 33%, 35%);
+    --main-transition: .3s ease
+}
+
 .app {
     display: flex;
     flex-direction: column;
@@ -10,7 +22,8 @@
         flex-direction: row;
         justify-content: space-between;
         align-items: flex-start;
-        margin-top: 85px; 
+        column-gap: 35px;
+        margin: 75px 10px 20px 10px; 
     }
 
 }

@@ -5,13 +5,23 @@ import '../../Styles/BoardWithStatus.css';
 
 export function BoardWithStatus(props) {
 
-    const {winner, playerSymbol, gameNotActive, ...boardProps} = props;
+    const {
+        currBoard,
+        winner,
+        winnerLine,
+        handleSquareClick,
+        playerSymbol, 
+        gameNotActive
+    } = props;
 
     return (
         <section className={`board-with-status`}>
             <Board  
-                gameNotActive={gameNotActive} 
-                {...boardProps}
+                currBoard={currBoard}
+                winner={winner}
+                winnerLine={winnerLine}
+                handleSquareClick={handleSquareClick}
+                gameNotActive={gameNotActive}
             />
             <GameStatus 
                 winner={winner}

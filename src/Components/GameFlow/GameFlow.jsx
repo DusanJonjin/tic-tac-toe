@@ -20,7 +20,7 @@ export function GameFlow({ boardHistory, jumpToMove, gameNotActive }) {
                     {boardHistory.map((board, i, arr) => 
                         <li key={i} className='move'>
                             <button onClick={() => jumpToMove(i)}>
-                                {i ? `Go to move ${i}` : 'Go to game start'}
+                                {i ? `Go to move ${i}` : 'Go to start'}
                             </button>
                             <Board 
                                 currBoard={board}

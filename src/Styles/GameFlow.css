@@ -1,11 +1,10 @@
 .game-flow {
-    width: 500px;
+    width: var(--small-screen-width);
     max-width: 100%;
-    /*border: 1px solid honeydew*/
 }
 
 #moves-list {  
-    width: calc(250px + 15vw); 
+    width: calc(250px + 15vw);
     display: flex;
     flex-wrap: wrap;
     align-items: center;
@@ -13,7 +12,6 @@
     list-style: none;
     margin: 15px auto 20px auto;
     padding: 0;
-    /*border: 1px solid fuchsia*/
 }
 
 .move {
@@ -26,13 +24,22 @@
 }
 
 .move > button {
+    font-family: 'Roboto', sans-serif;
     font-size: 14px;
+    font-size: calc(11px + .5vw);
     width: 90%;
     padding: .3em 0;
     background-color: hsl(220, 33%, 28%);
     color: hsl(224, 100%, 88%);
     border: none;
     border-radius: 4px;
+    transition: var(--main-transition);
+}
+
+.move > button:hover {
+    color: var(--hover-font-color);
+    background-color: var(--hover-background);
+    cursor: pointer;
 }
 
 .move > .board {
@@ -50,15 +57,28 @@
 
 @media only screen and (min-width: 1001px) {
 
-    .move .square {
-        font-size: 1.2em;
-        width: 2vw;
-        height: 2vw;
-        border-radius: 2px;
+    .game-flow {
+        width: var(--large-screen-width);
+        max-width: 100%;
     }
 
-    #moves-list {   
-        gap:20px;
+    #moves-list {
+        width: calc(20px + 20vw);
+        margin: 10px auto 20px auto;
+    }
+
+    .move > button {
+        font-size: calc(8px + .3vw);
+        width: 95%;
+    }
+
+    .move > .board {
+        grid-template-columns: repeat(3, calc(25px + .5vw));
+        grid-template-rows: repeat(3, calc(25px + .5vw));
+    }
+
+    .move .square {
+        font-size: calc(7px + .5vw);
     }
 
 }

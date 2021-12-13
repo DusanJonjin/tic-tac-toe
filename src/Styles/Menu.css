@@ -1,9 +1,8 @@
 .menu {
     color: hsl(206, 11%, 87%);
-    width: 500px;
+    width: var(--small-screen-width);
     max-width: 100%;
     padding: 5px 0 20px 0;
-    /*border: 1px solid firebrick*/
 }
 
 .menu-form {
@@ -12,7 +11,7 @@
     justify-content: center;
     width: 350px;
     max-width: 100%;
-    margin: 0 auto
+    margin: 0 auto;
 }
 
 .choose-options-wrap {
@@ -20,15 +19,18 @@
 }
 
 .choose-option {
+    font-size: calc(10px + .5vw);
     display: flex;
     max-width: 100%;
-    padding: 7px 0;
+    padding: .5em 0;
     justify-content: space-around;
+    align-items: center;
 }
 
 .choose-option > label {
+    font-family: 'Open sans', sans-serif;
     font-size: 15px;
-    align-self: center;
+    font-weight: 300;
     width: 75px;
 }
 
@@ -36,39 +38,59 @@
     width: 174px;
 }
 
-.game-btn {
-    font-size: 14px;
-    color: hsl(224, 100%, 85%);
-    background-color: hsl(220, 33%, 30%);
-    width: 80px;
-    padding: 3px 0;
-    border: 2px solid hsl(0, 0%, 90%);
-    border: none;
-    border-radius: 5px;
-    margin-right: 7px;
+.two-play-options {
+    transition: var(--main-transition);
 }
 
-.btn-active {
-    color: white;
-    background-color: hsl(225, 56%, 56%);
-    border: none
-}
-
-.game {
-    display: block
-}
-
-.game > label {
-    margin-right: 5px;
+.no-options {
+    pointer-events: none;
+    opacity: .13;
 }
 
 button[type=submit] {
+    font-family: 'Open sans', sans-serif;
     font-size: 15px;
     font-weight: bold;
     margin: 15px auto 10px auto;
-    border: none;
+    padding: 5px 15px;
     background-color: hsl(220, 33%, 29%);
     color: hsl(224, 75%, 83%);
+    border: none;
     border-radius: 5px;
-    padding: 5px 15px;
+    transition: var(--main-transition);
+}
+
+button[type=submit]:hover {
+    color: var(--hover-font-color);
+    background-color: var(--hover-background);
+    cursor: pointer;
+}
+
+@media only screen and (min-width: 1001px) {
+
+    .menu {
+        width: var(--large-screen-width);
+        max-width: 100%;
+        padding: 5px 0 20px 0;
+    }
+
+    .menu-form {
+        width: calc(120px + 20vw);
+        max-width: 100%;
+    }
+
+    .choose-option > label {
+        font-size: calc(12px + .5vw);
+        width: 4.7em;
+    }
+
+    .choose-option > *:nth-child(2) {
+        width: 15em;
+    }
+
+    button[type=submit] {
+        font-size: calc(10px + .5vw);
+        margin: 1.2em auto .5em auto;
+        padding: .5em 1.5em;
+    }
 }

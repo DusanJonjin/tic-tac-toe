@@ -19,7 +19,7 @@ export function Menu(props) {
                         handleGameType={handleGameType} 
                         computerIsPlaying={computerIsPlaying}
                     />
-                    <div className={`select-options ${!computerIsPlaying ? 'no-select' : ''}`}>
+                    <div className={`two-play-options ${!computerIsPlaying ? 'no-options' : ''}`} >
                         {children}
                     </div>
                 </div>

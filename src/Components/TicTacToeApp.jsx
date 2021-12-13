@@ -51,7 +51,7 @@ export function TicTacToeApp() {
     };
 
     const handleChooseSymbol = chosenSymbol => {
-        if (chosenSymbol !== computer.symbol) return;
+        if (chosenSymbol === human) return;
         const compSymbol = chosenSymbol === player.x ? player.o : player.x;
         setComputer(prevComputer => ({...prevComputer, symbol: compSymbol}));
         setGameStarted(false);
@@ -142,7 +142,7 @@ export function TicTacToeApp() {
                     default: return
                 }
                 setMoveNumber(prevMoveNumber => prevMoveNumber + 1)
-            }, 600);
+            }, 650);
         }
     }, [winner, gameIsActive, computerIsNext]);
 
@@ -162,9 +162,9 @@ export function TicTacToeApp() {
             </Menu>
             <BoardWithStatus 
                 currBoard={currentBoard}
+                winner={winner}
                 winnerLine={winnerLine}
                 handleSquareClick={handleSquareClick}
-                winner={winner}
                 playerSymbol={playerSymbol}
                 gameNotActive={gameNotActive}         
             />
