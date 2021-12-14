@@ -18,7 +18,8 @@
 @media only screen and (min-width: 1001px) {
 
     .game-status {
-        height: 80px;
-        line-height: 80px;
+        height: auto;
+        line-height: normal;
+        padding-top: .8em;
     }
 }

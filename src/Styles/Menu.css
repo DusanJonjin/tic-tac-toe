@@ -81,7 +81,7 @@ button[type=submit]:hover {
 
     .choose-option > label {
         font-size: calc(12px + .5vw);
-        width: 4.7em;
+        width: 4.8em;
     }
 
     .choose-option > *:nth-child(2) {
