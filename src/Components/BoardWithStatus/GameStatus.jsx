@@ -4,7 +4,7 @@ import '../../Styles/GameStatus.css';
 export function GameStatus({ winner, playerSymbol, gameNotActive}) {
 
     const gameStatus = () => {
-        if (gameNotActive) return 'Press the start button to play';
+        if (gameNotActive) return 'Press the Start button to play';
         if (!winner) return `Next player: `;
         if (winner === 'tie') return 'It\'s a tied game!';
         return `Player ${winner} wins!`
