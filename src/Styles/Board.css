@@ -5,12 +5,12 @@
 }
 
 .board-inactive {
-    opacity: .45;
+    opacity: .5;
 }
 
 .square {
     font-family: 'Open sans', sans-serif;
-    background-color: hsl(220, 33%, 24%);
+    background-color: hsl(220, 33%, 25%);
     color: blanchedalmond;
     border: none;
     outline: none;
