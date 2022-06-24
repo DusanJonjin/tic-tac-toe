@@ -6,6 +6,7 @@
     font-size: calc(20px + .5vw);
     text-align: center;
     color: hsl(36, 100%, 92%);
+    padding-top: .5em;
     margin: 0;
 }
 

@@ -12,10 +12,12 @@
     width: 350px;
     max-width: 100%;
     margin: 0 auto;
+    padding: .5em 0;
 }
 
 .choose-options-wrap {
     margin: 0 auto;
+    padding-left: 5%;
 }
 
 .choose-option {
@@ -52,7 +54,7 @@ button[type=submit] {
     font-size: 15px;
     font-weight: bold;
     margin: 15px auto 10px auto;
-    padding: 5px 15px;
+    padding: .4em 1.5em;
     background-color: hsl(220, 33%, 29%);
     color: hsl(224, 75%, 83%);
     border: none;
@@ -79,6 +81,10 @@ button[type=submit]:hover {
         max-width: 100%;
     }
 
+    .choose-options-wrap {
+        padding-left: 12%;
+    }
+
     .choose-option > label {
         font-size: calc(12px + .5vw);
         width: 4.8em;
@@ -91,6 +97,6 @@ button[type=submit]:hover {
     button[type=submit] {
         font-size: calc(10px + .5vw);
         margin: 1.2em auto .5em auto;
-        padding: .5em 1.5em;
+        padding: .5em 2em;
     }
 }
