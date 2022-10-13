@@ -129,21 +129,24 @@ export function TicTacToeApp() {
 
     useEffect(() => {
         if (winner) setGameStarted(false);
-        if (gameStarted) {
-            if (winner || moveNumber > 8) return;
-            if (computerIsNext) setTimeout(() => {
-                switch(difficulty) {
-                    case 'easy': easyGame();
-                    break;
-                    case 'medium': mediumGame();
-                    break;
-                    case 'impossible': impossibleGame();
-                    break;
-                    default: return
+        const gameTimeout = setTimeout(() => {
+            if (gameStarted) {
+                if (winner || moveNumber > 8) return;
+                if (computerIsNext) {
+                    switch(difficulty) {
+                        case 'easy': easyGame();
+                        break;
+                        case 'medium': mediumGame();
+                        break;
+                        case 'impossible': impossibleGame();
+                        break;
+                        default: return
+                    }
+                    setMoveNumber(prevMoveNumber => prevMoveNumber + 1);
                 }
-                setMoveNumber(prevMoveNumber => prevMoveNumber + 1)
-            }, 650);
-        }
+            }
+        }, 650);
+        return () => clearTimeout(gameTimeout);
     }, [winner, gameIsActive, computerIsNext]);
 
 

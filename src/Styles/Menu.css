@@ -82,12 +82,12 @@ button[type=submit]:hover {
     }
 
     .choose-options-wrap {
-        padding-left: 12%;
+        padding-left: 13%;
     }
 
     .choose-option > label {
         font-size: calc(12px + .5vw);
-        width: 4.8em;
+        width: 5em;
     }
 
     .choose-option > *:nth-child(2) {
