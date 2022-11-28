@@ -10,17 +10,13 @@ import '../Styles/TicTacToeApp.css';
 export function TicTacToeApp() {
 
     const [gameStarted, setGameStarted] = useState(false);
-
     const [difficulty, setDifficulty] = useState('easy');
 
     const initialBoardHistory = [Array(9).fill(null)];
-
     const [boardHistory, setBoardHistory] = useState(initialBoardHistory);
-
     const [moveNumber, setMoveNumber] = useState(0);
 
     const player = {x: 'X', o: 'O'};
-
     const [computer, setComputer] = useState({isPlaying: true, symbol: player.o});
 
 
@@ -29,21 +25,20 @@ export function TicTacToeApp() {
     const { winner, winnerLine } = gameWinner(currentBoard);
 
     const gameIsActive = gameStarted && !winner;
-
     const gameNotActive = !gameStarted && !winner;
 
     const playerSymbol = moveNumber % 2 === 0 ? player.x : player.o;
 
     const comp = computer.symbol;
-
     const human = comp === player.o ? player.x : player.o;
 
     const computerIsNext = computer.isPlaying && (comp === playerSymbol);
-    
+
 
     const handleGameType = i => {
         // i can be 0 (1 player), or 1 (2 players)
         if (i && !computer.isPlaying || !i && computer.isPlaying) return;
+        if (gameIsActive && computerIsNext) return;
         setComputer(prevComputer => ({...prevComputer, isPlaying: !i})); 
         setGameStarted(false);
         setBoardHistory(initialBoardHistory);
@@ -52,6 +47,7 @@ export function TicTacToeApp() {
 
     const handleChooseSymbol = chosenSymbol => {
         if (chosenSymbol === human) return;
+        if (gameIsActive && computerIsNext) return;
         const compSymbol = chosenSymbol === player.x ? player.o : player.x;
         setComputer(prevComputer => ({...prevComputer, symbol: compSymbol}));
         setGameStarted(false);
@@ -60,6 +56,7 @@ export function TicTacToeApp() {
     };
 
     const handleChooseDifficulty = chosenDiff => {
+        if (gameIsActive && computerIsNext) return;
         setDifficulty(chosenDiff);
         setGameStarted(false);
         setBoardHistory(initialBoardHistory);
@@ -67,6 +64,7 @@ export function TicTacToeApp() {
     };
 
     const handleGameStart = e => {
+        if (gameIsActive && computerIsNext) return;
         e.preventDefault();
         setGameStarted(true);
         setBoardHistory(initialBoardHistory);
