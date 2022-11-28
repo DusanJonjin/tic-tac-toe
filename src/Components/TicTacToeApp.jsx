@@ -64,8 +64,8 @@ export function TicTacToeApp() {
     };
 
     const handleGameStart = e => {
-        if (gameIsActive && computerIsNext) return;
         e.preventDefault();
+        if (gameIsActive && computerIsNext) return;
         setGameStarted(true);
         setBoardHistory(initialBoardHistory);
         setMoveNumber(0);
