@@ -1,9 +1,8 @@
 import React from 'react';
-import '../../Styles/ChooseSymbol.css'
+import { symbols } from '../../Utilities/Fixtures/gameData';
+import '../../Styles/ChooseSymbol.css';
 
 export function ChooseSymbol({ handleChooseSymbol, humanSymbol }) {
-
-    const symbols = ['X', 'O'];
 
     return (
         <div className='choose-option'>

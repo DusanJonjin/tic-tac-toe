@@ -1,13 +1,4 @@
-const winnerLines = [
-    [0, 1, 2],
-    [3, 4, 5],
-    [6, 7, 8],
-    [0, 3, 6],
-    [1, 4, 7],
-    [2, 5, 8],
-    [0, 4, 8],
-    [2, 4, 6]
-];
+import { winnerLines } from "../Fixtures/gameData";
 
 export const gameWinner = board => {
     const game = winnerLines.reduce((acc, winnerLine) => {
@@ -21,7 +12,6 @@ export const gameWinner = board => {
 
     else return game;
 };
-
 
 const winScore = {  
     human: -10,

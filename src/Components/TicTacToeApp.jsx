@@ -4,24 +4,19 @@ import { ChooseSymbol } from './Menu/ChooseSymbol';
 import { ChooseDifficulty } from './Menu/ChooseDifficulty';
 import { BoardWithStatus } from './BoardWithStatus/BoardWithStatus';
 import { GameFlow } from './GameFlow/GameFlow';
-import { gameWinner, bestMove } from '../Utilities/gameFunctions';
+import { initialBoardHistory, player } from '../Utilities/Fixtures/gameData';
+import { gameWinner, bestMove } from '../Utilities/Game functions/winnerAndBestMove';
 import '../Styles/TicTacToeApp.css';
  
 export function TicTacToeApp() {
 
     const [gameStarted, setGameStarted] = useState(false);
     const [difficulty, setDifficulty] = useState('easy');
-
-    const initialBoardHistory = [Array(9).fill(null)];
     const [boardHistory, setBoardHistory] = useState(initialBoardHistory);
     const [moveNumber, setMoveNumber] = useState(0);
-
-    const player = {x: 'X', o: 'O'};
     const [computer, setComputer] = useState({isPlaying: true, symbol: player.o});
 
-
     const currentBoard = boardHistory[moveNumber];
-
     const { winner, winnerLine } = gameWinner(currentBoard);
 
     const gameIsActive = gameStarted && !winner;

@@ -1,9 +1,8 @@
 import React from 'react';
-import '../../Styles/ChooseDifficulty.css'
+import { difficulties } from '../../Utilities/Fixtures/gameData';
+import '../../Styles/ChooseDifficulty.css';
 
 export function ChooseDifficulty({ handleChooseDifficulty }) {
-
-    const difficulties = ['easy', 'medium', 'impossible'];
 
     return (
         <div className='choose-option'>

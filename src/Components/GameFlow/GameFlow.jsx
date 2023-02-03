@@ -1,17 +1,9 @@
 import React from 'react';
 import { Board } from '../- Shared components -/Board';
+import { findLastMoveIndex } from '../../Utilities/Game functions/findLastMoveIndex';
 import '../../Styles/GameFlow.css'
 
 export function GameFlow({ boardHistory, jumpToMove, gameNotActive }) {
-
-    const lastMoveIndex = (arr, i, board) => {
-        if (i < 1) return [];
-        const prevBoard = arr[i - 1];
-        const newMoveIndex = board.reduce((acc, square, index) =>
-            square !== prevBoard[index] ? [...acc, index] : acc, []
-        );
-        return newMoveIndex;
-    };
 
     return (
         <section className='game-flow'>
@@ -24,7 +16,7 @@ export function GameFlow({ boardHistory, jumpToMove, gameNotActive }) {
                             </button>
                             <Board 
                                 currBoard={board}
-                                winnerLine={lastMoveIndex(arr, i, board)}        
+                                winnerLine={findLastMoveIndex(arr, i, board)}        
                             />
                         </li>
                     )}

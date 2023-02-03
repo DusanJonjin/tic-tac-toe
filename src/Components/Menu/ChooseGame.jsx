@@ -1,9 +1,8 @@
 import React from 'react';
-import '../../Styles/ChooseGame.css'
+import { gameTypes } from '../../Utilities/Fixtures/gameData';
+import '../../Styles/ChooseGame.css';
 
 export function ChooseGame({ handleGameType, computerIsPlaying }) {
-
-    const types = ['1 player', '2 players'];
 
     const playersCount = computerIsPlaying ? '1' : '2';
 
@@ -11,7 +10,7 @@ export function ChooseGame({ handleGameType, computerIsPlaying }) {
         <div className='choose-option'>
             <label>Game:</label> 
             <div>          
-                {types.map((gameType, i) =>
+                {gameTypes.map((gameType, i) =>
                     <button
                         key={gameType}
                         type='button'
