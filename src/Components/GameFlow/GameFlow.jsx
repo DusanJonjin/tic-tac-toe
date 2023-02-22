@@ -1,6 +1,6 @@
 import React from 'react';
 import { Board } from '../- Shared components -/Board';
-import { findLastMoveIndex } from '../../Utilities/Game functions/findLastMoveIndex';
+import { findLastMoveIndex } from '../../Utilities/Game functions/indexOperations';
 import '../../Styles/GameFlow.css'
 
 export function GameFlow({ boardHistory, jumpToMove, gameNotActive }) {

@@ -6,6 +6,7 @@ import { BoardWithStatus } from './BoardWithStatus/BoardWithStatus';
 import { GameFlow } from './GameFlow/GameFlow';
 import { initialBoardHistory, player } from '../Utilities/Fixtures/gameData';
 import { gameWinner, bestMove } from '../Utilities/Game functions/winnerAndBestMove';
+import { getRandomNullIndex } from '../Utilities/Game functions/indexOperations';
 import '../Styles/TicTacToeApp.css';
  
 export function TicTacToeApp() {
@@ -82,11 +83,6 @@ export function TicTacToeApp() {
         setGameStarted(true);
         window.scrollTo(0, 0)
     }
-
-    const getRandomNullIndex = board => {
-        const boardNullIndexes = board.reduce((acc, v, i) => !v ? [...acc, i] : acc, []);
-        return boardNullIndexes[Math.floor(Math.random() * boardNullIndexes.length)];
-    };
 
     const easyGame = () => {
         setBoardHistory(prevBoardHistory => {
