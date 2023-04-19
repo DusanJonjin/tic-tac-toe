@@ -1,19 +1,20 @@
-import React, {useState, useEffect} from 'react';
-import { Menu } from './Menu/Menu';
-import { ChooseSymbol } from './Menu/ChooseSymbol';
-import { ChooseDifficulty } from './Menu/ChooseDifficulty';
-import { BoardWithStatus } from './BoardWithStatus/BoardWithStatus';
-import { GameFlow } from './GameFlow/GameFlow';
-import { initialBoardHistory, player } from '../Utilities/Fixtures/gameData';
-import { gameWinner, bestMove } from '../Utilities/Game functions/winnerAndBestMove';
-import { getRandomNullIndex } from '../Utilities/Game functions/indexOperations';
-import '../Styles/TicTacToeApp.css';
+import React, { useState, useEffect, useReducer } from 'react';
+import { Menu } from './Components/Menu/Menu';
+import { ChooseSymbol } from './Components/Menu/ChooseSymbol';
+import { ChooseDifficulty } from './Components/Menu/ChooseDifficulty';
+import { BoardWithStatus } from './Components/BoardWithStatus/BoardWithStatus';
+import { GameFlow } from './Components/GameFlow/GameFlow';
+import { boardHistoryReducer, initialBoardHistory } from './Reducers/boardHistoryReducer';
+import { setInitialBoardHistory, easyGame, mediumGame, impossibleGame, playerSquareClick } from './Reducers/boardHistoryActions';
+import { player } from './Utilities/Fixtures/gameData';
+import { gameWinner } from './Utilities/Game functions/winnerAndBestMove';
+import './Styles/TicTacToeApp.css';
  
 export function TicTacToeApp() {
 
     const [gameStarted, setGameStarted] = useState(false);
     const [difficulty, setDifficulty] = useState('easy');
-    const [boardHistory, setBoardHistory] = useState(initialBoardHistory);
+    const [boardHistory, dispatch] = useReducer(boardHistoryReducer, initialBoardHistory);
     const [moveNumber, setMoveNumber] = useState(0);
     const [computer, setComputer] = useState({isPlaying: true, symbol: player.o});
 
@@ -37,7 +38,7 @@ export function TicTacToeApp() {
         if (gameIsActive && computerIsNext) return;
         setComputer(prevComputer => ({...prevComputer, isPlaying: !i})); 
         setGameStarted(false);
-        setBoardHistory(initialBoardHistory);
+        dispatch(setInitialBoardHistory());
         setMoveNumber(0);
     };
 
@@ -47,7 +48,7 @@ export function TicTacToeApp() {
         const compSymbol = chosenSymbol === player.x ? player.o : player.x;
         setComputer(prevComputer => ({...prevComputer, symbol: compSymbol}));
         setGameStarted(false);
-        setBoardHistory(initialBoardHistory);
+        dispatch(setInitialBoardHistory());
         setMoveNumber(0);
     };
 
@@ -55,7 +56,7 @@ export function TicTacToeApp() {
         if (gameIsActive && computerIsNext) return;
         setDifficulty(chosenDiff);
         setGameStarted(false);
-        setBoardHistory(initialBoardHistory);
+        dispatch(setInitialBoardHistory());
         setMoveNumber(0);
     };
 
@@ -63,18 +64,13 @@ export function TicTacToeApp() {
         e.preventDefault();
         if (gameIsActive && computerIsNext) return;
         setGameStarted(true);
-        setBoardHistory(initialBoardHistory);
+        dispatch(setInitialBoardHistory());
         setMoveNumber(0);
     };
 
     const handleSquareClick = (squareValue, squareIndex) => {
         if (!gameStarted || squareValue || computerIsNext || winner) return;
-        setBoardHistory(prevBoardHistory => {
-            const currBoardHistory = prevBoardHistory.slice(0, moveNumber + 1);
-            const currBoard = currBoardHistory[moveNumber];
-            const newBoard = currBoard.map((v ,i) => i === squareIndex ? playerSymbol : v);
-            return [...currBoardHistory, newBoard];
-        });
+        dispatch(playerSquareClick(moveNumber, playerSymbol, squareIndex));
         setMoveNumber(prevMoveNumber => prevMoveNumber + 1);
     };
 
@@ -84,60 +80,23 @@ export function TicTacToeApp() {
         window.scrollTo(0, 0)
     }
 
-    const easyGame = () => {
-        setBoardHistory(prevBoardHistory => {
-            const currBoardHistory = prevBoardHistory.slice(0, moveNumber + 1);
-            const currBoard = currBoardHistory[moveNumber];
-            const randomNullIndex = getRandomNullIndex(currBoard);
-            const newBoard = currBoard.map((v, i) => i === randomNullIndex ? comp : v);
-            return [...currBoardHistory, newBoard];
-        })
-    }
-
-    const mediumGame = () => {
-        setBoardHistory(prevBoardHistory => {
-            const currBoardHistory = prevBoardHistory.slice(0, moveNumber + 1);
-            const currBoard = [...currBoardHistory[moveNumber]];
-            if (moveNumber > 5) {
-                const randomNullIndex = getRandomNullIndex(currBoard);
-                currBoard[randomNullIndex] = comp;
-            }
-            else bestMove(moveNumber, currBoard, comp, human);
-            return [...currBoardHistory, currBoard];
-        })
-    }
-
-    const impossibleGame = () => {
-        setBoardHistory(prevBoardHistory => {
-            const currBoardHistory = prevBoardHistory.slice(0, moveNumber + 1);
-            const currBoard = [...currBoardHistory[moveNumber]];
-            bestMove(moveNumber, currBoard, comp, human);
-            return [...currBoardHistory, currBoard];
-        });
-    };
-
     useEffect(() => {
         if (winner) setGameStarted(false);
+        if (!gameStarted || !computerIsNext || winner || moveNumber > 8) return;
         const gameTimeout = setTimeout(() => {
-            if (gameStarted) {
-                if (winner || moveNumber > 8) return;
-                if (computerIsNext) {
-                    switch(difficulty) {
-                        case 'easy': easyGame();
-                        break;
-                        case 'medium': mediumGame();
-                        break;
-                        case 'impossible': impossibleGame();
-                        break;
-                        default: return
-                    }
-                    setMoveNumber(prevMoveNumber => prevMoveNumber + 1);
-                }
+            switch(difficulty) {
+                case 'easy': dispatch(easyGame(moveNumber, comp));
+                break;
+                case 'medium': dispatch(mediumGame(moveNumber, comp, human));
+                break;
+                case 'impossible': dispatch(impossibleGame(moveNumber, comp, human));
+                break;
+                default: return
             }
+            setMoveNumber(prevMoveNumber => prevMoveNumber + 1);           
         }, 650);
         return () => clearTimeout(gameTimeout);
     }, [winner, gameIsActive, computerIsNext]);
-
 
     return (
         <main className="app">

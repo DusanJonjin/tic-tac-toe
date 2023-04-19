@@ -9,8 +9,6 @@ const winnerLines = [
     [2, 4, 6]
 ];
 
-const initialBoardHistory = [Array(9).fill(null)];
-
 const player = {x: 'X', o: 'O'};
 
 const gameTypes = ['1 player', '2 players'];
@@ -21,7 +19,6 @@ const difficulties = ['easy', 'medium', 'impossible'];
 
 export { 
     winnerLines,
-    initialBoardHistory,
     player,
     gameTypes,
     symbols,
